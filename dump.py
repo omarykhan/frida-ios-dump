@@ -24,7 +24,7 @@ import paramiko
 from scp import SCPClient
 from tqdm import tqdm
 import traceback
-
+import time
 
 import select
 
@@ -537,6 +537,9 @@ if __name__ == "__main__":
         ssh.connect(Host, port=Port, username=User,
                     password=Password, key_filename=KeyFileName)
 
+        print ("hide jailbreak in dopamine")
+        time.sleep(10)
+
         forwardThread = threading.Thread(target=forward_tunnel, args=(
             args.lhost, args.lport, args.fridaHost, args.fridaPort, ssh.get_transport(),))
 
@@ -557,6 +560,8 @@ if __name__ == "__main__":
                 output_ipa = display_name
             output_ipa = re.sub('\.ipa$', '', output_ipa)
             if session:
+                print ("unhide jailbreak now")
+                time.sleep(10)
                 start_dump(session, output_ipa)
 
     except paramiko.ssh_exception.NoValidConnectionsError as e:
